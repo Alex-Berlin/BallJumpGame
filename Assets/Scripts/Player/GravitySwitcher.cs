@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(GroundChecker))]
-public class GravityController : MonoBehaviour
+public class GravitySwitcher : MonoBehaviour
 {
     //On tap, changes gravity direction on opposite.
 
@@ -10,17 +10,19 @@ public class GravityController : MonoBehaviour
     public event Action OnGroundLeave;
 
     private Rigidbody2D rb;
+    private GroundChecker groundChecker;
 
     private void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        TryGetComponent(out rb);
+        TryGetComponent(out groundChecker);
         rb.gravityScale = gravityScale;
     }
 
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && GroundChecker.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.IsGrounded)
         {
             rb.gravityScale = -Math.Sign(rb.gravityScale) * DifficultyModifier.CurrentDifMod * gravityScale;
             OnGroundLeave?.Invoke();

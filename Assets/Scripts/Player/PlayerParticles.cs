@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleManager : MonoBehaviour
+public class PlayerParticles : MonoBehaviour
 {
     private ParticleSystem particles;
     private void OnEnable()

@@ -7,31 +7,32 @@ public class GroundChecker : MonoBehaviour
     //Checks whether the player touches ground or not. 
 
     public event Action OnGroundTouch;
-    public static bool isGrounded = false;
-    [SerializeField] private bool CoyoteTimeEnabled; //coyote time adds a little bit of time for player to tap after they ran off the platform, making the game more forgiving
-    [SerializeField] private float CoyoteTime = 0.05f; //in seconds
+    public bool IsGrounded = false;
+    [Tooltip("Enable time delay till ground leave registers.")]
+    [SerializeField] private bool coyoteTimeEnabled; //coyote time adds a little bit of time for player to tap after they ran off the platform, making the game more forgiving
+    [SerializeField] private float coyoteTime = 0.05f; //in seconds
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isGrounded = true;
+        IsGrounded = true;
         OnGroundTouch?.Invoke();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (CoyoteTimeEnabled)
+        if (coyoteTimeEnabled)
         {
-            Invoke(nameof(ToggleGroundedToFalse), CoyoteTime);
+            Invoke(nameof(ToggleGroundedToFalse), coyoteTime);
         } else
         {
-            isGrounded = false;
+            IsGrounded = false;
         }
 
     }
 
     private void ToggleGroundedToFalse()
     {
-        isGrounded = false;
+        IsGrounded = false;
     }
 
 

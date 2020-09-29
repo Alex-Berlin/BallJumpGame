@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
+public class Scorer : MonoBehaviour
 {
     //Increase score on ground touch
     private int score = 0;
