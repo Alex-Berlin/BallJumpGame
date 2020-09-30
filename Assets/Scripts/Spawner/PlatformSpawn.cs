@@ -4,6 +4,7 @@ public class PlatformSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject platform;
     private GameObject lastSpawnedPlatform;
+    private SpriteRenderer spriteRenderer;
     private bool isPlatformOnBottom = false;//important to be false
     private float verticalOffset;
 
@@ -27,7 +28,7 @@ public class PlatformSpawn : MonoBehaviour
         }
         //distance here is between ((half the platform length + random spacing between platforms)) and position of spawner
         //|--half of platform--] + |between space| <= x.position
-        if (lastSpawnedPlatform.transform.position.x + lastSpawnedPlatform.transform.localScale.x / 2 + betweenPlatformSpace <=
+        if (lastSpawnedPlatform.transform.position.x + spriteRenderer.size.x / 2 + betweenPlatformSpace <=
             transform.position.x)
         {
             return true;
@@ -65,10 +66,11 @@ public class PlatformSpawn : MonoBehaviour
         DetermineVerticalPosition();
         DetermineBetweenSpaceLength();
         lastSpawnedPlatform = PlatformPool.Instance.Get();
+        lastSpawnedPlatform.TryGetComponent(out spriteRenderer);
         lastSpawnedPlatform.transform.position = //POSITION, it spawn on spawner position + half platform length((---- x.pos + [--half lenght--|))
             new Vector3(transform.position.x + nextSpawnedPlatformLength / 2, verticalOffset, transform.position.z);
-        lastSpawnedPlatform.transform.localScale = //SCALE
-            new Vector3(nextSpawnedPlatformLength, platform.transform.localScale.y, platform.transform.localScale.z);
+        spriteRenderer.size = //SCALE
+            new Vector2(nextSpawnedPlatformLength, 5f);
         lastSpawnedPlatform.gameObject.SetActive(true);
         DetermineLength();
     }

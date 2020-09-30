@@ -22,7 +22,7 @@ public class GravitySwitcher : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.IsGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.IsGrounded && !PauseGame.IsPaused)
         {
             rb.gravityScale = -Math.Sign(rb.gravityScale) * DifficultyModifier.CurrentDifMod * gravityScale;
             OnGroundLeave?.Invoke();
