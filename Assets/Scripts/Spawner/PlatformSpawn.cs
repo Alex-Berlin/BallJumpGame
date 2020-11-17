@@ -67,7 +67,7 @@ public class PlatformSpawn : MonoBehaviour
         DetermineBetweenSpaceLength();
         lastSpawnedPlatform = PlatformPool.Instance.Get();
         lastSpawnedPlatform.TryGetComponent(out spriteRenderer);
-        lastSpawnedPlatform.transform.position = //POSITION, it spawn on spawner position + half platform length((---- x.pos + [--half lenght--|))
+        lastSpawnedPlatform.transform.position = //POSITION, it spawns on spawner position + half platform length((---- x.pos + [--half lenght--|))
             new Vector3(transform.position.x + nextSpawnedPlatformLength / 2, verticalOffset, transform.position.z);
         spriteRenderer.size = //SCALE
             new Vector2(nextSpawnedPlatformLength, 5f);

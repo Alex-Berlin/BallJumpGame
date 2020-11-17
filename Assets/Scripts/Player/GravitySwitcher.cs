@@ -21,12 +21,31 @@ public class GravitySwitcher : MonoBehaviour
 
     private void Update()
     {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.IsGrounded && !PauseGame.IsPaused)
+            if (touch.phase == TouchPhase.Began)
+            {
+                SwitchGravity();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SwitchGravity();
+        }
+
+
+    }
+
+    private void SwitchGravity()
+    {
+        if (groundChecker.IsGrounded && !PauseGame.IsPaused)
         {
             rb.gravityScale = -Math.Sign(rb.gravityScale) * DifficultyModifier.CurrentDifMod * gravityScale;
             OnGroundLeave?.Invoke();
-        } 
+        }
     }
 
 
