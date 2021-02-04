@@ -44,7 +44,7 @@ namespace BallJump.Player
 
         private void SwitchGravity()
         {
-            if (groundChecker.IsGrounded && !PauseGame.IsPaused)
+            if (groundChecker.isGrounded && !PauseGame.IsPaused)
             {
                 rb.gravityScale = -Math.Sign(rb.gravityScale) * DifficultyModifier.CurrentDifMod * gravityScale;
                 OnGroundLeave?.Invoke();
