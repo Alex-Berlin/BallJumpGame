@@ -9,11 +9,10 @@ namespace BallJump.Player
     {
         //On tap, changes gravity direction on opposite.
 
-        [SerializeField][Range(0f, 500f)] private float gravityScale = 5f;
-        public event Action OnGroundLeave;
+        [SerializeField] [Range(0f, 500f)] private float gravityScale = 5f;
+        private GroundChecker groundChecker;
 
         private Rigidbody2D rb;
-        private GroundChecker groundChecker;
 
         private void Awake()
         {
@@ -26,21 +25,15 @@ namespace BallJump.Player
         {
             if (Input.touchCount > 0)
             {
-                Touch touch = Input.GetTouch(0);
+                var touch = Input.GetTouch(0);
 
-                if (touch.phase == TouchPhase.Began)
-                {
-                    SwitchGravity();
-                }
+                if (touch.phase == TouchPhase.Began) SwitchGravity();
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SwitchGravity();
-            }
-
-
+            if (Input.GetKeyDown(KeyCode.Space)) SwitchGravity();
         }
+
+        public event Action OnGroundLeave;
 
         private void SwitchGravity()
         {
@@ -50,8 +43,5 @@ namespace BallJump.Player
                 OnGroundLeave?.Invoke();
             }
         }
-
-
-
     }
 }

@@ -14,7 +14,7 @@ namespace BallJump.Platform
 
         [SerializeField] private GameObject platformPrefab;
         [SerializeField] private int count = 5;
-        private Queue<GameObject> platforms = new Queue<GameObject>();
+        private readonly Queue<GameObject> platforms = new Queue<GameObject>();
         public static PlatformPool Instance { get; private set; }
 
         private void Awake()
@@ -30,9 +30,9 @@ namespace BallJump.Platform
         //create queue of PLATFORM objects with COUNT amount
         private void CreatePlatforms(int count)
         {
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
-                GameObject newPlatform = Instantiate(platformPrefab, transform);
+                var newPlatform = Instantiate(platformPrefab, transform);
                 newPlatform.gameObject.SetActive(false);
                 platforms.Enqueue(newPlatform);
             }
@@ -48,10 +48,7 @@ namespace BallJump.Platform
         //returns first platform in queue and dequeues it
         public GameObject Get()
         {
-            if (platforms.Count == 0)
-            {
-                CreatePlatforms(1);
-            }
+            if (platforms.Count == 0) CreatePlatforms(1);
 
             return platforms.Dequeue();
         }

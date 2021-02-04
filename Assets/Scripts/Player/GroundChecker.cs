@@ -6,12 +6,12 @@ namespace BallJump.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class GroundChecker : MonoBehaviour
     {
-        //Checks whether the player touches ground or not. 
+        public bool isGrounded;
 
-        public event Action OnGroundTouch;
-        public bool isGrounded = false;
-        [Tooltip("Enable time delay till ground leave registers.")]
-        [SerializeField] private bool coyoteTimeEnabled; //coyote time adds a little bit of time for player to tap after they ran off the platform, making the game more forgiving
+        [Tooltip("Enable time delay till ground leave registers.")] [SerializeField]
+        private bool
+            coyoteTimeEnabled; //coyote time adds a little bit of time for player to tap after they ran off the platform, making the game more forgiving
+
         [SerializeField] private float coyoteTime = 0.05f; //in seconds
         private bool cancelCoyote = true;
 
@@ -27,22 +27,21 @@ namespace BallJump.Player
             if (coyoteTimeEnabled)
             {
                 cancelCoyote = false;
-                Invoke(nameof(ToggleGroundedToFalse), coyoteTime); 
-            } else
+                Invoke(nameof(ToggleGroundedToFalse), coyoteTime);
+            }
+            else
             {
                 isGrounded = false;
             }
-
         }
+        //Checks whether the player touches ground or not. 
+
+        public event Action OnGroundTouch;
 
         private void ToggleGroundedToFalse()
         {
             if (cancelCoyote) return; //already on ground, no need to toggle
             isGrounded = false;
         }
-
-
-
-
     }
 }

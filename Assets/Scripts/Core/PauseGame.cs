@@ -4,11 +4,11 @@ namespace BallJump.Core
 {
     public class PauseGame : MonoBehaviour
     {
-        [SerializeField] 
-        private GameObject pauseMenu;
-        [Tooltip("Button to open main menu")]
-        [SerializeField]
+        [SerializeField] private GameObject pauseMenu;
+
+        [Tooltip("Button to open main menu")] [SerializeField]
         private GameObject menuButton;
+
         public static bool IsPaused { get; private set; }
 
         private void Start()

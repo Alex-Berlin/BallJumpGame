@@ -10,7 +10,6 @@ namespace BallJump.UI
         private void Awake()
         {
             FindObjectOfType<PlayerDeath>().OnDeath += ActivateDeathScreen;
-
         }
 
         private void ActivateDeathScreen()

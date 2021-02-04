@@ -12,14 +12,14 @@ namespace BallJump.Ads
         {
             FindObjectOfType<PlayerDeath>().OnDeath += AddToDeathCount;
         }
+
         private void AddToDeathCount()
         {
             _deathCount++;
             if (_deathCount < deathCountToAdvertisement) return;
-            
+
             _deathCount = 0;
             ShowAdd();
-
         }
 
         private void ShowAdd()

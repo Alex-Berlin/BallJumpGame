@@ -6,7 +6,6 @@ namespace BallJump.Player
 {
     public class PlayerDeath : MonoBehaviour
     {
-        public event Action OnDeath;
         public static bool IsDead { get; private set; }
 
         private void Awake()
@@ -17,10 +16,11 @@ namespace BallJump.Player
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (collision.gameObject.GetComponent<LevelBorder>() == null) return;
-            
+
             OnDeath?.Invoke();
             IsDead = true;
         }
 
+        public event Action OnDeath;
     }
 }

@@ -8,6 +8,7 @@ namespace BallJump.Platform
     {
         private SpriteRenderer spriteRenderer;
         private Transform tf;
+
         private void Start()
         {
             TryGetComponent(out spriteRenderer);

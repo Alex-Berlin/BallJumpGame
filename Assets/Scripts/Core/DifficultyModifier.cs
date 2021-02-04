@@ -7,8 +7,8 @@ namespace BallJump.Core
         //linearly increases difficulty until reaching max at set timer
 
         [SerializeField] private float timeToMaxDifficulty = 60f; //in seconds
-        private float currentTime;
         [SerializeField] private float difficultyMaxMod = 2f; //max multiplier for platform move speed
+        private float currentTime;
         public static float CurrentDifMod { get; private set; }
 
         private void Update()

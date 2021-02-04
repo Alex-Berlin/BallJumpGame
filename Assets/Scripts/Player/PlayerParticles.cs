@@ -5,6 +5,7 @@ namespace BallJump.Player
     public class PlayerParticles : MonoBehaviour
     {
         private ParticleSystem particles;
+
         private void OnEnable()
         {
             if (gameObject.GetComponent<ParticleSystem>() != null)

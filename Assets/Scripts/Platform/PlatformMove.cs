@@ -15,7 +15,8 @@ namespace BallJump.Platform
 
         private void FixedUpdate()
         {
-            rb.MovePosition(transform.position + Vector3.left * (speed * Time.fixedDeltaTime * DifficultyModifier.CurrentDifMod));
+            rb.MovePosition(transform.position +
+                            Vector3.left * (speed * Time.fixedDeltaTime * DifficultyModifier.CurrentDifMod));
         }
     }
 }
