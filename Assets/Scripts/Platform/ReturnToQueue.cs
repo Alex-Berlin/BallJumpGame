@@ -1,5 +1,4 @@
-﻿using BallJump.Spawner;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BallJump.Platform
 {

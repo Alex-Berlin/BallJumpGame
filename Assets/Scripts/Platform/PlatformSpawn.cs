@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BallJump.Spawner
+namespace BallJump.Platform
 {
     public class PlatformSpawn : MonoBehaviour
     {
@@ -16,8 +16,8 @@ namespace BallJump.Spawner
         private float betweenPlatformSpace;
 
         [Header("Platform's Length")]
-        [SerializeField] private float PlatformLengthMinimum = 5f;
-        [SerializeField] private float PlatformLengthMaximum = 15f;
+        [SerializeField] private float platformLengthMinimum = 5f;
+        [SerializeField] private float platformLengthMaximum = 15f;
 
         #region pre-spawn settings
 
@@ -30,22 +30,15 @@ namespace BallJump.Spawner
             }
             //distance here is between ((half the platform length + random spacing between platforms)) and position of spawner
             //|--half of platform--] + |between space| <= x.position
-            if (lastSpawnedPlatform.transform.position.x + spriteRenderer.size.x / 2 + betweenPlatformSpace <=
-                transform.position.x)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lastSpawnedPlatform.transform.position.x + spriteRenderer.size.x / 2 + betweenPlatformSpace <=
+                   transform.position.x;
         }
 
         private float nextSpawnedPlatformLength;
 
         private void DetermineLength()
         {
-            nextSpawnedPlatformLength = Random.Range(PlatformLengthMinimum, PlatformLengthMaximum);
+            nextSpawnedPlatformLength = Random.Range(platformLengthMinimum, platformLengthMaximum);
         }
 
         private void DetermineVerticalPosition()

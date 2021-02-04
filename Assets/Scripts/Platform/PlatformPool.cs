@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace BallJump.Spawner
+namespace BallJump.Platform
 {
     public class PlatformPool : MonoBehaviour
     {
