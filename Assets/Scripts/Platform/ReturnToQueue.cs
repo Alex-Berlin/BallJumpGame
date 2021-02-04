@@ -1,26 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using BallJump.Spawner;
 using UnityEngine;
 
-public class ReturnToQueue : MonoBehaviour
+namespace BallJump.Platform
 {
-    // returns object to POOL on TIMER seconds after enable.
-
-    [SerializeField] private float timer = 10f;
-    private float currentTime;
-
-    private void OnEnable()
+    public class ReturnToQueue : MonoBehaviour
     {
-        currentTime = 0f;
-    }
+        // returns object to POOL on TIMER seconds after enable.
 
-    private void Update()
-    {
-        currentTime += Time.deltaTime;
-        if (currentTime >= timer)
+        [SerializeField] private float timer = 10f;
+        private float currentTime;
+
+        private void OnEnable()
         {
-            PlatformPool.Instance.ReturnToPool(gameObject);
+            currentTime = 0f;
         }
-    }
 
+        private void Update()
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime >= timer)
+            {
+                PlatformPool.Instance.ReturnToPool(gameObject);
+            }
+        }
+
+    }
 }

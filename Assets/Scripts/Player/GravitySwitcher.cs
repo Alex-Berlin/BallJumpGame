@@ -1,53 +1,57 @@
 ﻿using System;
+using BallJump.Core;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(GroundChecker))]
-public class GravitySwitcher : MonoBehaviour
+namespace BallJump.Player
 {
-    //On tap, changes gravity direction on opposite.
-
-    [SerializeField][Range(0f, 500f)] private float gravityScale = 5f;
-    public event Action OnGroundLeave;
-
-    private Rigidbody2D rb;
-    private GroundChecker groundChecker;
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody2D), typeof(GroundChecker))]
+    public class GravitySwitcher : MonoBehaviour
     {
-        TryGetComponent(out rb);
-        TryGetComponent(out groundChecker);
-        rb.gravityScale = gravityScale;
-    }
+        //On tap, changes gravity direction on opposite.
 
-    private void Update()
-    {
-        if (Input.touchCount > 0)
+        [SerializeField][Range(0f, 500f)] private float gravityScale = 5f;
+        public event Action OnGroundLeave;
+
+        private Rigidbody2D rb;
+        private GroundChecker groundChecker;
+
+        private void Awake()
         {
-            Touch touch = Input.GetTouch(0);
+            TryGetComponent(out rb);
+            TryGetComponent(out groundChecker);
+            rb.gravityScale = gravityScale;
+        }
 
-            if (touch.phase == TouchPhase.Began)
+        private void Update()
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    SwitchGravity();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 SwitchGravity();
             }
+
+
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        private void SwitchGravity()
         {
-            SwitchGravity();
+            if (groundChecker.IsGrounded && !PauseGame.IsPaused)
+            {
+                rb.gravityScale = -Math.Sign(rb.gravityScale) * DifficultyModifier.CurrentDifMod * gravityScale;
+                OnGroundLeave?.Invoke();
+            }
         }
+
 
 
     }
-
-    private void SwitchGravity()
-    {
-        if (groundChecker.IsGrounded && !PauseGame.IsPaused)
-        {
-            rb.gravityScale = -Math.Sign(rb.gravityScale) * DifficultyModifier.CurrentDifMod * gravityScale;
-            OnGroundLeave?.Invoke();
-        }
-    }
-
-
-
 }

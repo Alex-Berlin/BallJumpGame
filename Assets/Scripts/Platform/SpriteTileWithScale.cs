@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 
-[ExecuteInEditMode]
-[RequireComponent(typeof(SpriteRenderer))]
-public class SpriteTileWithScale : MonoBehaviour
+namespace BallJump.Platform
 {
-    private SpriteRenderer spriteRenderer;
-    private Transform tf;
-    private void Start()
+    [ExecuteInEditMode]
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class SpriteTileWithScale : MonoBehaviour
     {
-        TryGetComponent(out spriteRenderer);
-        TryGetComponent(out tf);
-    }
+        private SpriteRenderer spriteRenderer;
+        private Transform tf;
+        private void Start()
+        {
+            TryGetComponent(out spriteRenderer);
+            TryGetComponent(out tf);
+        }
 
-    private void Update()
-    {
-        spriteRenderer.size = new Vector2(tf.lossyScale.x, 5);
+        private void Update()
+        {
+            spriteRenderer.size = new Vector2(tf.lossyScale.x, 5);
+        }
     }
 }

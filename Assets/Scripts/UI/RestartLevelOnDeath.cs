@@ -1,16 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using BallJump.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RestartLevelOnDeath : MonoBehaviour
+namespace BallJump.UI
 {
-
-    private void Update()
+    public class RestartLevelOnDeath : MonoBehaviour
     {
-        if (PlayerDeath.isDead && (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0) )
+
+        private void Update()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (PlayerDeath.isDead && (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0) )
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 }

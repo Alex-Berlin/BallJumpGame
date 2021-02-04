@@ -1,24 +1,27 @@
 ﻿using System;
+using BallJump.Dummies;
 using UnityEngine;
 
-
-public class PlayerDeath : MonoBehaviour
+namespace BallJump.Player
 {
-    public event Action OnDeath;
-    public static bool isDead { get; private set; }
-
-    private void Awake()
+    public class PlayerDeath : MonoBehaviour
     {
-        isDead = false;
-    }
+        public event Action OnDeath;
+        public static bool isDead { get; private set; }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<LevelBorder>() != null)
+        private void Awake()
         {
-            OnDeath?.Invoke();
-            isDead = true;
+            isDead = false;
         }
-    }
 
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.GetComponent<LevelBorder>() != null)
+            {
+                OnDeath?.Invoke();
+                isDead = true;
+            }
+        }
+
+    }
 }

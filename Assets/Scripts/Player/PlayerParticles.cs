@@ -1,23 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerParticles : MonoBehaviour
+namespace BallJump.Player
 {
-    private ParticleSystem particles;
-    private void OnEnable()
+    public class PlayerParticles : MonoBehaviour
     {
-        if (gameObject.GetComponent<ParticleSystem>() != null)
+        private ParticleSystem particles;
+        private void OnEnable()
         {
-            particles = gameObject.GetComponent<ParticleSystem>();
-            FindObjectOfType<GroundChecker>().OnGroundTouch += EmitParticles;
-            FindObjectOfType<PlayerDeath>().OnDeath += EmitParticles;
+            if (gameObject.GetComponent<ParticleSystem>() != null)
+            {
+                particles = gameObject.GetComponent<ParticleSystem>();
+                FindObjectOfType<GroundChecker>().OnGroundTouch += EmitParticles;
+                FindObjectOfType<PlayerDeath>().OnDeath += EmitParticles;
+            }
         }
-    }
 
-    private void EmitParticles()
-    {
-        if (particles != null)
-            particles.Play();
+        private void EmitParticles()
+        {
+            if (particles != null)
+                particles.Play();
+        }
     }
 }

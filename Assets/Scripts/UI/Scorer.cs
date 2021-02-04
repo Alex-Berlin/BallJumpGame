@@ -1,29 +1,33 @@
-﻿using UnityEngine;
+﻿using BallJump.Player;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class Scorer : MonoBehaviour
+namespace BallJump.UI
 {
-    //Increase score on ground touch
-    private int score = 0;
-    [SerializeField] private Text scoreText;
-
-    private void Awake()
+    public class Scorer : MonoBehaviour
     {
-        score = 0;
-        if (scoreText != null)
+        //Increase score on ground touch
+        private int score = 0;
+        [SerializeField] private Text scoreText;
+
+        private void Awake()
         {
-            FindObjectOfType<GroundChecker>().OnGroundTouch += IncreaseScore;
-            scoreText.text = score.ToString("000");
+            score = 0;
+            if (scoreText != null)
+            {
+                FindObjectOfType<GroundChecker>().OnGroundTouch += IncreaseScore;
+                scoreText.text = score.ToString("000");
+            }
+
         }
 
+        private void IncreaseScore()
+        {
+            score++;
+            if (scoreText != null)
+                scoreText.text = score.ToString("000");
+        }
+
+
     }
-
-    private void IncreaseScore()
-    {
-        score++;
-        if (scoreText != null)
-            scoreText.text = score.ToString("000");
-    }
-
-
 }
