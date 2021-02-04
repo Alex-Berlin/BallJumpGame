@@ -9,14 +9,16 @@ namespace BallJump.Player
         //Checks whether the player touches ground or not. 
 
         public event Action OnGroundTouch;
-        public bool IsGrounded = false;
+        public bool isGrounded = false;
         [Tooltip("Enable time delay till ground leave registers.")]
         [SerializeField] private bool coyoteTimeEnabled; //coyote time adds a little bit of time for player to tap after they ran off the platform, making the game more forgiving
         [SerializeField] private float coyoteTime = 0.05f; //in seconds
+        private bool cancelCoyote = true;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            IsGrounded = true;
+            isGrounded = true;
+            cancelCoyote = true;
             OnGroundTouch?.Invoke();
         }
 
@@ -24,17 +26,19 @@ namespace BallJump.Player
         {
             if (coyoteTimeEnabled)
             {
-                Invoke(nameof(ToggleGroundedToFalse), coyoteTime);
+                cancelCoyote = false;
+                Invoke(nameof(ToggleGroundedToFalse), coyoteTime); 
             } else
             {
-                IsGrounded = false;
+                isGrounded = false;
             }
 
         }
 
         private void ToggleGroundedToFalse()
         {
-            IsGrounded = false;
+            if (cancelCoyote) return; //already on ground, no need to toggle
+            isGrounded = false;
         }
 
 
